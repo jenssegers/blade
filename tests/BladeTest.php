@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Container\Container;
 use Jenssegers\Blade\Blade;
 
 class BladeTest extends PHPUnit_Framework_TestCase {
