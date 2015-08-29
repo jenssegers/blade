@@ -28,4 +28,12 @@ class BladeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('this is plain php', trim($output));
     }
 
+    public function testRenderAlias()
+    {
+        $blade = new Blade('tests/views', 'tests/cache');
+
+        $output = $blade->render('basic');
+        $this->assertEquals('hello world', trim($output));
+    }
+
 }
