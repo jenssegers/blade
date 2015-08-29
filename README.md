@@ -5,6 +5,10 @@ Blade
 
 The standalone version of [Laravel's Blade templating engine](http://laravel.com/docs/5.1/blade) for use outside of Laravel.
 
+<p align="center">
+<img src="http://jenssegers.be/uploads/images/blade.png?v1" height="275">
+</p>
+
 Installation
 ------------
 
