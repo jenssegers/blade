@@ -68,6 +68,19 @@ class Blade {
     }
 
     /**
+     * Return blade compiler
+     *
+     * @return mixed
+     */
+    public function compiler()
+    {
+        $engineResolver = $this->container->make('view.engine.resolver');
+        $bladeEngine = $engineResolver->resolve('blade');
+
+        return $bladeEngine->getCompiler();
+    }
+
+    /**
      * Pass any method to the view factory instance.
      *
      * @param  string $method
