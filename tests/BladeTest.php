@@ -10,7 +10,7 @@ class BladeTest extends PHPUnit_Framework_TestCase
     {
         $this->blade = new Blade('tests/views', 'tests/cache');
 
-        $this->blade->compiler()->directive('datetime', function($expression) {
+        $this->blade->compiler()->directive('datetime', function ($expression) {
             return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
         });
     }
