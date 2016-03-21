@@ -16,6 +16,13 @@ class Blade {
     protected $container;
 
     /**
+     * Engine Resolver
+     *
+     * @var
+     */
+    protected $engineResolver;
+
+    /**
      * Constructor.
      *
      * @param array     $viewPaths
@@ -31,6 +38,8 @@ class Blade {
         $this->setupContainer();
 
         (new ViewServiceProvider($this->container))->register();
+
+        $this->engineResolver = $this->container->make('view.engine.resolver');
     }
 
     /**
@@ -68,14 +77,13 @@ class Blade {
     }
 
     /**
-     * Return blade compiler
+     * Get the compiler
      *
      * @return mixed
      */
     public function compiler()
     {
-        $engineResolver = $this->container->make('view.engine.resolver');
-        $bladeEngine = $engineResolver->resolve('blade');
+        $bladeEngine = $this->engineResolver->resolve('blade');
 
         return $bladeEngine->getCompiler();
     }
