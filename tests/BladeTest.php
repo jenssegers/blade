@@ -77,6 +77,7 @@ class BladeTest extends PHPUnit_Framework_TestCase
      * HTML Reader on sample_output folder
      *
      * @param string $blade_name The blade file name/path
+     *
      * @return string
      */
     private function read($blade_name)
