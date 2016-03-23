@@ -48,4 +48,4 @@ The Blade instances passes all methods to the internal view factory. So methods 
 Integrations
 -----
 
-- [Phalcon Slayer Framework](https://github.com/phalconslayer/slayer)
+- [Phalcon Slayer Framework](https://github.com/phalconslayer/slayer) comes out of the box with Blade.
