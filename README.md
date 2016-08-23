@@ -31,4 +31,21 @@ $blade = new Blade('views', 'cache');
 echo $blade->make('homepage', ['name' => 'John Doe']);
 ```
 
-The Blade instances passes all methods to the internal view factory. So methods such as `exists`, `file`, `share`, `composer` and `creator` are available as well. Check out the [original documentation](http://laravel.com/docs/5.1/views) for more information.
+Now you can easily create a directive by calling the ``compiler()`` function
+
+```php
+$blade->compiler()->directive('datetime', function ($expression) {
+    return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
+});
+
+{{-- In your Blade Template --}}
+<?php $dateObj = new DateTime('2017-01-01 23:59:59') ?>
+@datetime($dateObj)
+```
+
+The Blade instances passes all methods to the internal view factory. So methods such as `exists`, `file`, `share`, `composer` and `creator` are available as well. Check out the [original documentation](http://laravel.com/docs/5.2/views) for more information.
+
+Integrations
+-----
+
+- [Phalcon Slayer Framework](https://github.com/phalconslayer/slayer) comes out of the box with Blade.

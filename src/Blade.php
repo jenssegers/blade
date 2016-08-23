@@ -1,4 +1,5 @@
-<?php namespace Jenssegers\Blade;
+<?php
+namespace Jenssegers\Blade;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
@@ -6,7 +7,8 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\ViewServiceProvider;
 
-class Blade {
+class Blade
+{
 
     /**
      * Container instance.
@@ -69,6 +71,7 @@ class Blade {
      * @param  string $view
      * @param  array  $data
      * @param  array  $mergeData
+     *
      * @return string
      */
     public function render($view, $data = [], $mergeData = [])
