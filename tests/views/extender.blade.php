@@ -5,7 +5,6 @@ Test Title
 @endsection
 
 @section('content')
-
 {{-- you must get 'Default' --}}
 {{ isset($name) ? $name : 'Default' }}<br>
 {{ $name or 'Still Default' }}<br>

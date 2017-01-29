@@ -61,7 +61,7 @@ class BladeTest extends PHPUnit_Framework_TestCase
     /**
      * Html Writer on sample_output folder
      *
-     * @param string $output The HTML output
+     * @param string $output     The HTML output
      * @param string $blade_name The blade file name/path
      *
      * @return void

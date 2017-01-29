@@ -1,4 +1,5 @@
 <?php
+
 namespace Jenssegers\Blade;
 
 use Illuminate\Container\Container;
@@ -9,7 +10,6 @@ use Illuminate\View\ViewServiceProvider;
 
 class Blade
 {
-
     /**
      * Container instance.
      *
@@ -27,9 +27,9 @@ class Blade
     /**
      * Constructor.
      *
-     * @param array     $viewPaths
-     * @param string    $cachePath
-     * @param Container $container
+     * @param string|array       $viewPaths
+     * @param string             $cachePath
+     * @param ContainerInterface $container
      */
     public function __construct($viewPaths, $cachePath, ContainerInterface $container = null)
     {
@@ -59,7 +59,7 @@ class Blade
 
         $this->container->bindIf('config', function () {
             return [
-                'view.paths'    => (array) $this->viewPaths,
+                'view.paths' => (array) $this->viewPaths,
                 'view.compiled' => $this->cachePath,
             ];
         }, true);
@@ -102,5 +102,4 @@ class Blade
     {
         return call_user_func_array([$this->container['view'], $method], $params);
     }
-
 }
