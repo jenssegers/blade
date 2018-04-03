@@ -1,8 +1,9 @@
 <?php
 
 use Jenssegers\Blade\Blade;
+use PHPUnit\Framework\TestCase;
 
-class BladeTest extends PHPUnit_Framework_TestCase
+class BladeTest extends TestCase
 {
     private $blade;
 
