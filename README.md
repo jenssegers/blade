@@ -25,7 +25,7 @@ use Jenssegers\Blade\Blade;
 
 $blade = new Blade('views', 'cache');
 
-echo $blade->render('homepage', ['name' => 'John Doe']);
+echo $blade->make('homepage', ['name' => 'John Doe']);
 ```
 
 You can also extend Blade using the `directive()` function:

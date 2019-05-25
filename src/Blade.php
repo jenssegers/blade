@@ -69,11 +69,6 @@ class Blade
         }, true);
     }
 
-    public function render(string $view, array $data = [], array $mergeData = []): string
-    {
-        return $this->make($view, $data, $mergeData)->render();
-    }
-
     public function make(string $view, array $data = [], array $mergeData = []): View
     {
         return $this->factory->make($view, $data, $mergeData);

@@ -21,31 +21,31 @@ class BladeTest extends TestCase
 
     public function testBasic()
     {
-        $output = $this->blade->make('basic')->render();
+        $output = $this->blade->make('basic');
         $this->assertEquals('hello world', trim($output));
     }
 
     public function testVariables()
     {
-        $output = $this->blade->make('variables', ['name' => 'John Doe'])->render();
+        $output = $this->blade->make('variables', ['name' => 'John Doe']);
         $this->assertEquals('hello John Doe', trim($output));
     }
 
     public function testNonBlade()
     {
-        $output = $this->blade->make('plain')->render();
+        $output = $this->blade->make('plain');
         $this->assertEquals('this is plain php', trim($output));
     }
 
     public function testRenderAlias()
     {
-        $output = $this->blade->render('basic');
+        $output = $this->blade->make('basic');
         $this->assertEquals('hello world', trim($output));
     }
 
     public function testDirective()
     {
-        $output = $this->blade->render('directive', ['birthday' => new DateTime('1989/08/19')]);
+        $output = $this->blade->make('directive', ['birthday' => new DateTime('1989/08/19')]);
         $this->assertEquals('Your birthday is August 19, 1989 12:00 am', trim($output));
     }
 
@@ -69,7 +69,7 @@ class BladeTest extends TestCase
             ],
         ];
 
-        $output = $this->blade->render('other', [
+        $output = $this->blade->make('other', [
             'users' => $users,
             'name' => '<strong>John</strong>',
             'authenticated' => false,
@@ -82,7 +82,7 @@ class BladeTest extends TestCase
 
     public function testExtends()
     {
-        $output = $this->blade->make('extends')->render();
+        $output = $this->blade->make('extends');
 
         $this->write($output, 'extends');
 
