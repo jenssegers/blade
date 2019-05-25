@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Factory;
 use Illuminate\View\ViewServiceProvider;
 
 class Blade
@@ -27,6 +28,16 @@ class Blade
      */
     protected $container;
 
+    /**
+     * @var Factory
+     */
+    private $factory;
+
+    /**
+     * @var BladeCompiler
+     */
+    private $compiler;
+
     public function __construct($viewPaths, string $cachePath, ContainerInterface $container = null)
     {
         $this->viewPaths = $viewPaths;
@@ -34,10 +45,10 @@ class Blade
         $this->container = $container ?: new Container;
 
         $this->setupContainer();
-
         (new ViewServiceProvider($this->container))->register();
 
-        $this->engineResolver = $this->container->make('view.engine.resolver');
+        $this->factory = $this->container->get('view');
+        $this->compiler = $this->container->get('blade.compiler');
     }
 
     protected function setupContainer()
@@ -65,21 +76,21 @@ class Blade
 
     public function make(string $view, array $data = [], array $mergeData = []): View
     {
-        return $this->container['view']->make($view, $data, $mergeData);
+        return $this->factory->make($view, $data, $mergeData);
     }
 
     public function compiler(): BladeCompiler
     {
-        return $this->container['blade.compiler'];
+        return $this->compiler;
     }
 
     public function directive(string $name, callable $handler)
     {
-        $this->compiler()->directive($name, $handler);
+        $this->compiler->directive($name, $handler);
     }
 
     public function __call(string $method, array $params)
     {
-        return call_user_func_array([$this->container['view'], $method], $params);
+        return call_user_func_array([$this->factory, $method], $params);
     }
 }
