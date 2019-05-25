@@ -4,8 +4,10 @@ namespace Jenssegers\Blade;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
+use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\ViewServiceProvider;
 
 class Blade
@@ -21,23 +23,11 @@ class Blade
     private $cachePath;
 
     /**
-     * Container instance.
      * @var Container
      */
     protected $container;
 
-    /**
-     * Engine Resolver
-     * @var
-     */
-    protected $engineResolver;
-
-    /**
-     * @param string|array $viewPaths
-     * @param string $cachePath
-     * @param ContainerInterface $container
-     */
-    public function __construct($viewPaths, $cachePath, ContainerInterface $container = null)
+    public function __construct($viewPaths, string $cachePath, ContainerInterface $container = null)
     {
         $this->viewPaths = $viewPaths;
         $this->cachePath = $cachePath;
@@ -50,9 +40,6 @@ class Blade
         $this->engineResolver = $this->container->make('view.engine.resolver');
     }
 
-    /**
-     * Bind required instances for the service provider.
-     */
     protected function setupContainer()
     {
         $this->container->bindIf('files', function () {
@@ -71,33 +58,27 @@ class Blade
         }, true);
     }
 
-    /**
-     * @param string $view
-     * @param array $data
-     * @param array $mergeData
-     * @return string
-     */
-    public function render($view, $data = [], $mergeData = [])
+    public function render(string $view, array $data = [], array $mergeData = []): string
     {
-        return $this->container['view']->make($view, $data, $mergeData)->render();
+        return $this->make($view, $data, $mergeData)->render();
     }
 
-    /**
-     * @return mixed
-     */
-    public function compiler()
+    public function make(string $view, array $data = [], array $mergeData = []): View
     {
-        $bladeEngine = $this->engineResolver->resolve('blade');
-
-        return $bladeEngine->getCompiler();
+        return $this->container['view']->make($view, $data, $mergeData);
     }
 
-    /**
-     * @param string $method
-     * @param array $params
-     * @return mixed
-     */
-    public function __call($method, $params)
+    public function compiler(): BladeCompiler
+    {
+        return $this->container['blade.compiler'];
+    }
+
+    public function directive(string $name, callable $handler)
+    {
+        $this->compiler()->directive($name, $handler);
+    }
+
+    public function __call(string $method, array $params)
     {
         return call_user_func_array([$this->container['view'], $method], $params);
     }

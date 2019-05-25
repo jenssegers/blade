@@ -1,38 +1,17 @@
-@extends('main.layout')
-
-@section('title')
-Test Title
-@endsection
-
-@section('content')
 {{-- you must get 'Default' --}}
-{{ isset($name) ? $name : 'Default' }}<br>
-{{ $name or 'Still Default' }}<br>
+{{ $undefined ?? 'Default' }}<br>
 
 {{-- it must strip out this XSS sample --}}
 {{ '<script type="text/javascript">alert("Hacked!");</script>' }}<br>
 
 {{-- this must be bold --}}
-<?php $name = '<strong>John Doe</strong>' ?>
 Hello, {!! $name !!}.<br>
 
 {{-- using include directive --}}
 @include('variables', ['name' => $name]) <br>
 
-{{-- @each('variables', $users, 'name') <br> --}}
-
-<?php
-$dateObj = new DateTime('2017-01-01 23:59:59');
-?>
-
-{{-- using object with() --}}
-<?php echo with($dateObj)->format('m/d/Y H:i:s'); ?> <br>
-
-{{-- using custom directive --}}
-@datetime($dateObj) <br>
-
 {{-- using unless, reversing 'true' --}}
-@unless ($auth_check = false)
+@unless ($authenticated)
     You are not signed in.
 @endunless
 
@@ -47,11 +26,11 @@ $dateObj = new DateTime('2017-01-01 23:59:59');
                         <th>Email</th>
                     </tr>
                     @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user['id'] }}</td>
-                        <td>{{ $user['name'] }}</td>
-                        <td>{{ $user['email'] }}</td>
-                    </tr>
+                        <tr id="{{ $loop->index }}">
+                            <td>{{ $user['id'] }}</td>
+                            <td>{{ $user['name'] }}</td>
+                            <td>{{ $user['email'] }}</td>
+                        </tr>
                     @endforeach
                 @else
                     <tr>
@@ -62,4 +41,3 @@ $dateObj = new DateTime('2017-01-01 23:59:59');
         </div>
     </div>
 </div>
-@endsection

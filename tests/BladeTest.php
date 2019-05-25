@@ -5,13 +5,16 @@ use PHPUnit\Framework\TestCase;
 
 class BladeTest extends TestCase
 {
+    /**
+     * @var Blade
+     */
     private $blade;
 
     public function setUp()
     {
         $this->blade = new Blade('tests/views', 'tests/cache');
 
-        $this->blade->compiler()->directive('datetime', function ($expression) {
+        $this->blade->directive('datetime', function ($expression) {
             return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
         });
     }
@@ -40,50 +43,62 @@ class BladeTest extends TestCase
         $this->assertEquals('hello world', trim($output));
     }
 
-    public function testExtenderBlade()
+    public function testDirective()
     {
-        $users = require __DIR__.'/data/users.php';
-
-        $blade_name = 'extender';
-
-        $output = $this->blade
-            ->make($blade_name, $users)
-            ->render();
-
-        # uncomment if you want to update the sample output
-        // $this->write($output, $blade_name);
-
-        $this->assertEquals(
-            $output,
-            $this->read($blade_name)
-        );
+        $output = $this->blade->render('directive', ['birthday' => new DateTime('1989/08/19')]);
+        $this->assertEquals('Your birthday is August 19, 1989 12:00 am', trim($output));
     }
 
-    /**
-     * Html Writer on sample_output folder
-     *
-     * @param string $output     The HTML output
-     * @param string $blade_name The blade file name/path
-     *
-     * @return void
-     */
-    private function write($output, $blade_name)
+    public function testOther()
     {
-        $file_path = __DIR__.'/sample_output/'.$blade_name.'.html';
+        $users = [
+            [
+                'id' => 1,
+                'name' => 'John Doe',
+                'email' => 'john.doe@doe.com',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Jen Doe',
+                'email' => 'jen.doe@example.com',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Jerry Doe',
+                'email' => 'jerry.doe@doe.com',
+            ],
+        ];
+
+        $output = $this->blade->render('other', [
+            'users' => $users,
+            'name' => '<strong>John</strong>',
+            'authenticated' => false,
+        ]);
+
+        $this->write($output, 'other');
+
+        $this->assertEquals($output, $this->expected('other'));
+    }
+
+    public function testExtends()
+    {
+        $output = $this->blade->make('extends')->render();
+
+        $this->write($output, 'extends');
+
+        $this->assertEquals($output, $this->expected('extends'));
+    }
+
+    private function write(string $output, string $file)
+    {
+        $file_path = __DIR__ . '/expected/' . $file . '.html';
 
         file_put_contents($file_path, $output);
     }
 
-    /**
-     * HTML Reader on sample_output folder
-     *
-     * @param string $blade_name The blade file name/path
-     *
-     * @return string
-     */
-    private function read($blade_name)
+    private function expected(string $file): string
     {
-        $file_path = __DIR__.'/sample_output/'.$blade_name.'.html';
+        $file_path = __DIR__ . '/expected/' . $file . '.html';
 
         return file_get_contents($file_path);
     }
