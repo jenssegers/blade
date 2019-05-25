@@ -11,24 +11,30 @@ use Illuminate\View\ViewServiceProvider;
 class Blade
 {
     /**
+     * @var array|string
+     */
+    private $viewPaths;
+
+    /**
+     * @var string
+     */
+    private $cachePath;
+
+    /**
      * Container instance.
-     *
      * @var Container
      */
     protected $container;
 
     /**
      * Engine Resolver
-     *
      * @var
      */
     protected $engineResolver;
 
     /**
-     * Constructor.
-     *
-     * @param string|array       $viewPaths
-     * @param string             $cachePath
+     * @param string|array $viewPaths
+     * @param string $cachePath
      * @param ContainerInterface $container
      */
     public function __construct($viewPaths, $cachePath, ContainerInterface $container = null)
@@ -66,12 +72,9 @@ class Blade
     }
 
     /**
-     * Render shortcut.
-     *
-     * @param  string $view
-     * @param  array  $data
-     * @param  array  $mergeData
-     *
+     * @param string $view
+     * @param array $data
+     * @param array $mergeData
      * @return string
      */
     public function render($view, $data = [], $mergeData = [])
@@ -80,8 +83,6 @@ class Blade
     }
 
     /**
-     * Get the compiler
-     *
      * @return mixed
      */
     public function compiler()
@@ -92,10 +93,8 @@ class Blade
     }
 
     /**
-     * Pass any method to the view factory instance.
-     *
-     * @param  string $method
-     * @param  array  $params
+     * @param string $method
+     * @param array $params
      * @return mixed
      */
     public function __call($method, $params)
