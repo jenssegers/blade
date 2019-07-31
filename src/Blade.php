@@ -72,7 +72,7 @@ class Blade implements FactoryContract
 
     public function share($key, $value = null)
     {
-        return $this->factory->shared($key, $value);
+        return $this->factory->share($key, $value);
     }
 
     public function composer($views, $callback): array
