@@ -28,6 +28,12 @@ $blade = new Blade('views', 'cache');
 echo $blade->make('homepage', ['name' => 'John Doe'])->render();
 ```
 
+Alternatively you can use the shorthand method `render`:
+
+```php
+echo $blade->render('homepage', ['name' => 'John Doe']);
+```
+
 You can also extend Blade using the `directive()` function:
 
 ```php
