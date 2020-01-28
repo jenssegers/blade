@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory as FactoryContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Factory;
 use Illuminate\View\ViewServiceProvider;
@@ -58,6 +59,11 @@ class Blade implements FactoryContract
     public function directive(string $name, callable $handler)
     {
         $this->compiler->directive($name, $handler);
+    }
+    
+    public function if($name, callable $callback)
+    {
+        $this->compiler->if($name, $callback);
     }
 
     public function exists($view): bool
@@ -120,5 +126,7 @@ class Blade implements FactoryContract
                 'view.compiled' => $cachePath,
             ];
         }, true);
+        
+        Facade::setFacadeApplication($this->container);
     }
 }
