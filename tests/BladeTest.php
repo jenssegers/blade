@@ -22,7 +22,7 @@ class BladeTest extends TestCase
             return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
         });
 
-        $this->blade->if('ifdate', function($date){
+        $this->blade->if('ifdate', function ($date) {
             return $date instanceof DateTime;
         });
     }
@@ -71,7 +71,7 @@ class BladeTest extends TestCase
 
     public function testComposer()
     {
-        $this->blade->composer('variables', function(View $view){
+        $this->blade->composer('variables', function (View $view) {
             $view->with('name', 'John Doe and ' . $view->offsetGet('name'));
         });
 
@@ -81,10 +81,10 @@ class BladeTest extends TestCase
 
     public function testCreator()
     {
-        $this->blade->creator('variables', function(View $view){
+        $this->blade->creator('variables', function (View $view) {
             $view->with('name', 'John Doe');
         });
-        $this->blade->composer('variables', function(View $view){
+        $this->blade->composer('variables', function (View $view) {
             $view->with('name', 'Jane Doe and ' . $view->offsetGet('name'));
         });
 
@@ -164,17 +164,17 @@ class BladeTest extends TestCase
         $this->assertEquals($output, $this->expected('other'));
     }
 
-    public function testExtends()
-    {
-        $output = $this->blade->make('extends');
-
-        $this->assertEquals($output, $this->expected('extends'));
-    }
-
     private function expected(string $file): string
     {
         $file_path = __DIR__ . '/expected/' . $file . '.html';
 
         return file_get_contents($file_path);
+    }
+
+    public function testExtends()
+    {
+        $output = $this->blade->make('extends');
+
+        $this->assertEquals($output, $this->expected('extends'));
     }
 }
