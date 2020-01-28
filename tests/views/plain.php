@@ -1,1 +1,1 @@
-this is plain php
+{{ this is plain <?php echo 'php'; ?> }}

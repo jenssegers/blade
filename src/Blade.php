@@ -4,6 +4,7 @@ namespace Jenssegers\Blade;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory as FactoryContract;
 use Illuminate\Contracts\View\View;
 use Illuminate\Events\Dispatcher;
@@ -16,7 +17,7 @@ use Illuminate\View\ViewServiceProvider;
 class Blade implements FactoryContract
 {
     /**
-     * @var Container
+     * @var Application
      */
     protected $container;
 
