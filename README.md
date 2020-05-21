@@ -5,7 +5,7 @@
 The standalone version of [Laravel's Blade templating engine](https://laravel.com/docs/5.8/blade) for use outside of Laravel.
 
 <p align="center">
-<img src="https://jenssegers.com/uploads/images/blade2.png" height="200">
+<img src="https://jenssegers.com/static/media/blade2.png" height="200">
 </p>
 
 ## Installation
