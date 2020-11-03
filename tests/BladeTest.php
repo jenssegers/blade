@@ -16,7 +16,6 @@ class BladeTest extends TestCase
 
     public function setUp()
     {
-        exec('rm -rf tests/cache/*.php');
         $this->blade = new Blade('tests/views', 'tests/cache');
 
         $this->blade->directive('datetime', function ($expression) {
@@ -189,5 +188,10 @@ class BladeTest extends TestCase
         $output = $this->blade->make('extends');
 
         $this->assertEquals($output, $this->expected('extends'));
+    }
+
+    public function tearDown()
+    {
+        exec('rm -rf tests/cache/*.php');
     }
 }
