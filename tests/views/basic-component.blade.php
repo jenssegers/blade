@@ -1,0 +1,1 @@
+<x-basic :id="$id" class="{{ $class }}">{{ $content }}</x-basic>

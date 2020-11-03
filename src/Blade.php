@@ -127,6 +127,8 @@ class Blade implements FactoryContract
                 'view.compiled' => $cachePath,
             ];
         }, true);
+
+        Container::setInstance($this->container);
         
         Facade::setFacadeApplication($this->container);
     }
