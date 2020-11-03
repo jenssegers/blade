@@ -164,6 +164,18 @@ class BladeTest extends TestCase
         $this->assertEquals($output, $this->expected('other'));
     }
 
+    public function testAnonymousViewComponent()
+    {
+        $output = $this->blade->make("basic-component", ['id' => 'John Doe', 'class' => 'foo', 'content' => 'Jane Doe']);
+        $this->assertEquals(trim($output), $this->expected('basic-component'));
+    }
+
+    public function testExtendsViewComponent()
+    {
+        $output = $this->blade->make("extends-component", ['title' => 'John Doe', 'content' => 'Jane Doe']);
+        $this->assertEquals(trim($output), $this->expected('extends-component'));
+    }
+
     private function expected(string $file): string
     {
         $file_path = __DIR__ . '/expected/' . $file . '.html';
@@ -176,5 +188,10 @@ class BladeTest extends TestCase
         $output = $this->blade->make('extends');
 
         $this->assertEquals($output, $this->expected('extends'));
+    }
+
+    public function tearDown()
+    {
+        exec('rm -rf tests/cache/*.php');
     }
 }
