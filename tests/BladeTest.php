@@ -16,6 +16,7 @@ class BladeTest extends TestCase
 
     public function setUp()
     {
+        exec('rm -rf tests/cache/*.php');
         $this->blade = new Blade('tests/views', 'tests/cache');
 
         $this->blade->directive('datetime', function ($expression) {
