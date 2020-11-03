@@ -89,7 +89,7 @@ class BladeTest extends TestCase
             $view->with('name', 'Jane Doe and ' . $view->offsetGet('name'));
         });
 
-        $output = $this->blade->make('variables')->render();
+        $output = $this->blade->make('variables');
         $this->assertEquals('hello Jane Doe and John Doe', trim($output));
     }
 
@@ -160,7 +160,7 @@ class BladeTest extends TestCase
             'users' => $users,
             'name' => '<strong>John</strong>',
             'authenticated' => false,
-        ])->render();
+        ]);
 
         $this->assertEquals($output, $this->expected('other'));
     }
