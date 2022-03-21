@@ -14,7 +14,7 @@ class BladeTest extends TestCase
      */
     private $blade;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->blade = new Blade('tests/views', 'tests/cache');
 

@@ -2,6 +2,7 @@
 
 namespace Jenssegers\Blade;
 
+use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
 use Illuminate\Contracts\Foundation\Application;
@@ -61,7 +62,7 @@ class Blade implements FactoryContract
     {
         $this->compiler->directive($name, $handler);
     }
-    
+
     public function if($name, callable $callback)
     {
         $this->compiler->if($name, $callback);
@@ -111,7 +112,7 @@ class Blade implements FactoryContract
         return call_user_func_array([$this->factory, $method], $params);
     }
 
-    protected function setupContainer(array $viewPaths, string $cachePath)
+    protected function setupContainer(array $viewPaths, string $cachePath, string $basePath = '')
     {
         $this->container->bindIf('files', function () {
             return new Filesystem;
@@ -121,13 +122,14 @@ class Blade implements FactoryContract
             return new Dispatcher;
         }, true);
 
-        $this->container->bindIf('config', function () use ($viewPaths, $cachePath) {
-            return [
+        $this->container->bindIf('config', function ($app) use ($viewPaths, $cachePath, $basePath) {
+            return new Repository([
                 'view.paths' => $viewPaths,
                 'view.compiled' => $cachePath,
-            ];
+                'view.relative_hash' => $basePath,
+            ]);
         }, true);
-        
+
         Facade::setFacadeApplication($this->container);
     }
 }
