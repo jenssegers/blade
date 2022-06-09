@@ -1,5 +1,5 @@
 {
-    "name": "jenssegers/blade",
+    "name": "beebmx/blade",
     "description": "The standalone version of Laravel's Blade templating engine for use outside of Laravel.",
     "keywords": ["laravel", "blade", "template", "view", "render"],
     "license" : "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Jens Segers",
             "homepage": "https://jenssegers.com"
+        },
+        {
+            "name": "Fernando Gutierrez",
+            "homepage": "https://beeb.mx"
         }
     ],
     "require": {
