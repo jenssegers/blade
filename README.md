@@ -13,7 +13,7 @@ The standalone version of [Laravel's Blade templating engine](https://laravel.co
 Install using composer:
 
 ```bash
-composer require jenssegers/blade
+composer require beebmx/blade
 ```
 
 ## Usage
