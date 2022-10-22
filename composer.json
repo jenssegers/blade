@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0.2",
         "illuminate/view": "^7.0|^8.0|^9.0",
         "illuminate/config": "^9.0"
     },
@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Jenssegers\\Blade\\": "src/"
+            "Beebmx\\Blade\\": "src/"
         }
     },
     "scripts": {

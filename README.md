@@ -1,12 +1,9 @@
 # Blade
 
-[![Latest Stable Version](http://img.shields.io/github/release/jenssegers/blade.svg)](https://packagist.org/packages/jenssegers/blade) [![Build Status](http://img.shields.io/travis/jenssegers/blade.svg)](https://travis-ci.org/jenssegers/blade) [![Coverage Status](http://img.shields.io/coveralls/jenssegers/blade.svg)](https://coveralls.io/r/jenssegers/blade)
+[![Latest Stable Version](https://poser.pugx.org/beebmx/blade/v)](//packagist.org/packages/beebmx/blade)
+[![License](https://poser.pugx.org/beebmx/blade/license)](//packagist.org/packages/beebmx/blade)
 
 The standalone version of [Laravel's Blade templating engine](https://laravel.com/docs/9.x/blade) for use outside of Laravel.
-
-<p align="center">
-<img src="https://jenssegers.com/static/media/blade2.png" height="200">
-</p>
 
 ## Installation
 
@@ -21,9 +18,11 @@ composer require beebmx/blade
 Create a Blade instance by passing it the folder(s) where your view files are located, and a cache folder. Render a template by calling the `make` method. More information about the Blade templating engine can be found on http://laravel.com/docs/9.x/blade.
 
 ```php
-use Jenssegers\Blade\Blade;
+use Beebmx\Blade\Application;
+use Beebmx\Blade\Blade;
 
-$blade = new Blade('views', 'cache');
+$application = new Application;
+$blade = new Blade('views', 'cache', $application);
 
 echo $blade->make('homepage', ['name' => 'John Doe'])->render();
 ```
@@ -59,3 +58,9 @@ The Blade instances passes all methods to the internal view factory. So methods 
 ```bash
 composer test
 ```
+
+## Credits
+
+- Original repository [jenssegers/blade](https://github.com/jenssegers/blade)
+- Fernando Gutierrez [@beebmx](https://github.com/beebmx)
+- [All Contributors](../../contributors)

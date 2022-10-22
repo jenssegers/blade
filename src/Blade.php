@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Blade;
+namespace Beebmx\Blade;
 
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;

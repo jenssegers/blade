@@ -1,10 +1,11 @@
 <?php
 
+use Beebmx\Blade\Application;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\ViewFinderInterface;
-use Jenssegers\Blade\Blade;
+use Beebmx\Blade\Blade;
 use PHPUnit\Framework\TestCase;
 
 class BladeTest extends TestCase
@@ -16,7 +17,7 @@ class BladeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->blade = new Blade('tests/views', 'tests/cache');
+        $this->blade = new Blade('tests/views', 'tests/cache', new Application);
 
         $this->blade->directive('datetime', function ($expression) {
             return "<?php echo with({$expression})->format('F d, Y g:i a'); ?>";
