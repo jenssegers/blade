@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
-use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\ViewFinderInterface;
 use Jenssegers\Blade\Blade;
 use PHPUnit\Framework\TestCase;
@@ -72,7 +72,7 @@ class BladeTest extends TestCase
     public function testComposer()
     {
         $this->blade->composer('variables', function (View $view) {
-            $view->with('name', 'John Doe and ' . $view->offsetGet('name'));
+            $view->with('name', 'John Doe and '.$view->offsetGet('name'));
         });
 
         $output = $this->blade->make('variables', ['name' => 'Jane Doe']);
@@ -85,7 +85,7 @@ class BladeTest extends TestCase
             $view->with('name', 'John Doe');
         });
         $this->blade->composer('variables', function (View $view) {
-            $view->with('name', 'Jane Doe and ' . $view->offsetGet('name'));
+            $view->with('name', 'Jane Doe and '.$view->offsetGet('name'));
         });
 
         $output = $this->blade->make('variables');
@@ -166,7 +166,7 @@ class BladeTest extends TestCase
 
     private function expected(string $file): string
     {
-        $file_path = __DIR__ . '/expected/' . $file . '.html';
+        $file_path = __DIR__.'/expected/'.$file.'.html';
 
         return file_get_contents($file_path);
     }

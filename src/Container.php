@@ -18,8 +18,8 @@ class Container extends BaseContainer
 
     public function terminate()
     {
-        foreach ($this->terminatingCallbacks as $callback) {
-            $callback();
+        foreach ($this->terminatingCallbacks as $terminatingCallback) {
+            $terminatingCallback();
         }
     }
 }

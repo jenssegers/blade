@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Factory;
 use Illuminate\View\ViewServiceProvider;
-use Jenssegers\Blade\Container;
 
 class Blade implements FactoryContract
 {
