@@ -113,9 +113,9 @@ class Blade implements FactoryContract
 
     protected function setupContainer(array $viewPaths, string $cachePath)
     {
-        $this->container->singleton('files', fn () => new Filesystem);
-        $this->container->singleton('events', fn () => new Dispatcher);
-        $this->container->singleton('config', fn () => new Repository([
+        $this->container->bindIf('files', fn () => new Filesystem);
+        $this->container->bindIf('events', fn () => new Dispatcher);
+        $this->container->bindIf('config', fn () => new Repository([
             'view.paths' => $viewPaths,
             'view.compiled' => $cachePath,
         ]));
